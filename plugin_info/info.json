@@ -1,0 +1,20 @@
+{
+    "id": "busscolaires",
+    "name": "Bus scolaires",
+    "description": "Horaires du car scolaire et heure de départ à pied, marche comprise. Lit la fiche horaire officielle de la ligne, l'index GTFS du réseau et les alertes trafic, puis propose un trajet de remplacement quand le car est manqué ou qu'aucun ne circule. Commandes utilisables en scénario, quatre widgets, et une page dédiée à l'enfant, sans réglage ni compte.",
+    "licence": "GPL-3.0",
+    "author": "zucco-tech",
+    "require": "4.4.0",
+    "version": "2.38",
+    "category": "organization",
+    "hasDependency": true,
+    "hasOwnDeamon": true,
+    "maxDependancyInstallTime": 10,
+    "eventjs": false,
+    "documentation": "https://github.com/zucco-tech/jeedom-plugin-busscolaires",
+    "changelog": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/releases",
+    "issue": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/issues",
+    "language": [
+        "fr_FR"
+    ]
+}

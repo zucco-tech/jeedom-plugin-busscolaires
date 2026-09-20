@@ -1,0 +1,84 @@
+<div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class# #category#"
+     data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#"
+     data-version="#version#" data-translate-category="#translate_category#"
+     data-category="#category#" data-tags="#tags#"
+     style="width: #width#;height: #height#;#style#">
+  <style>
+    /* Une solution, lisible d'un coup. L'alternative tient sur une
+       ligne : trois propositions équivalentes ne sont pas trois choix,
+       c'est une hésitation. */
+    .pb-w{--fond:#23282e;--trait:#39424c;--encre:#eef2f6;--douce:#8b96a2;
+      --ambre:#e6a63f;--vert:#57ab7d;--bleu:#6ea8d8;--etat:var(--vert);
+      position:relative;padding:13px 15px 14px;border-radius:9px;
+      background:var(--fond);color:var(--encre);text-align:left;
+      border:1px solid var(--trait);font-variant-numeric:tabular-nums;
+      font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .pb-w.vide{--etat:#5d6874}
+    .pb-w .lis{position:absolute;top:0;bottom:0;left:0;width:3px;
+      border-radius:9px 0 0 9px;background:var(--etat)}
+    .pb-w .haut{display:flex;justify-content:space-between;
+      align-items:flex-start;gap:10px;margin-bottom:12px}
+    .pb-w .nom{font-weight:600;font-size:13.5px;line-height:1.25}
+    .pb-w .nom small{display:block;font-size:11px;font-weight:500;color:var(--douce)}
+    .pb-w .badge{flex:none;font:600 11px/1 ui-monospace,"IBM Plex Mono",monospace;
+      padding:4px 7px;border-radius:5px;background:#333a42;color:var(--douce)}
+
+    .pb-w .cap{display:flex;align-items:baseline;gap:8px}
+    .pb-w .gros{font:700 34px/.9 "Barlow Condensed",Barlow,sans-serif;color:var(--etat)}
+    .pb-w .cap span{font-size:12px;color:var(--douce)}
+    .pb-w .arrive{margin:5px 0 3px;font-size:12.5px;color:var(--douce)}
+    .pb-w .effort{margin:0 0 12px;font-size:11.5px;color:var(--douce);
+      padding:3px 7px;border-radius:4px;background:#2b323a;display:inline-block}
+    .pb-w .arrive b{color:var(--encre);font-weight:600}
+
+    .pb-w .rail{position:relative;padding-left:20px}
+    .pb-w .rail:before{content:"";position:absolute;left:5px;top:8px;bottom:8px;
+      width:2px;background:var(--trait)}
+    .pb-w .et{position:relative;display:flex;justify-content:space-between;
+      align-items:baseline;gap:10px;padding:3px 0;font-size:12.5px}
+    .pb-w .et:before{content:"";position:absolute;left:-19px;top:7px;width:8px;
+      height:8px;border-radius:50%;background:var(--bleu)}
+    .pb-w .et.sco:before{background:var(--ambre)}
+    .pb-w .et.pied:before{background:var(--fond);border:2px solid var(--trait);
+      top:6px;left:-20px;width:9px;height:9px}
+    .pb-w .et b{font:600 10.5px/1 ui-monospace,"IBM Plex Mono",monospace;
+      padding:2px 5px;border-radius:4px;background:rgba(110,168,216,.16);
+      color:var(--bleu);margin-right:5px}
+    .pb-w .et b.sco{background:rgba(230,166,63,.17);color:var(--ambre)}
+    .pb-w .et .h{font:600 12.5px/1 ui-monospace,"IBM Plex Mono",monospace;flex:none}
+    .pb-w .et .ou{color:var(--douce)}
+
+    .pb-w .sinon{margin-top:11px;padding-top:9px;border-top:1px solid var(--trait);
+      font-size:11.5px;color:var(--douce);display:flex;gap:7px;align-items:baseline}
+    .pb-w .sinon b{color:var(--encre);font-weight:600}
+    .pb-w .rien{font-size:12.5px;color:var(--douce);line-height:1.5}
+    .pb-w .pied{margin-top:10px;padding-top:9px;border-top:1px solid var(--trait);
+      display:flex;justify-content:space-between;gap:8px;font-size:11.5px;
+      color:var(--douce)}
+  </style>
+  <style>
+    /* Version mobile : même contenu, dimensionné pour le pouce. */
+    .car-w, .pb-w, .ca-w, .li-w { padding: 15px 16px 16px; border-radius: 11px; }
+    .car-w .gros, .pb-w .gros { font-size: 48px; }
+    .car-w .unite { font-size: 15px; }
+    .car-w .sous, .pb-w .arrive { font-size: 14px; }
+    .car-w .ou, .pb-w .et, .li-w .dep .ou { font-size: 14px; }
+    .car-w .h, .pb-w .et .h { font-size: 15px; }
+    .car-w .et, .pb-w .et { padding: 6px 0; }
+    .li-w .dep { padding: 9px 0; }
+    .li-w .dep .h { font-size: 22px; }
+    .ca-w .toile { padding: 8px; }
+    .car-w .pied, .pb-w .pied, .ca-w .pied, .li-w .pied { font-size: 12.5px; }
+  </style>
+
+
+  <div class="pb-w pb-#etat#">
+    <span class="lis"></span>
+    <div class="haut">
+      <div class="nom">#name_display#<small>#sous_titre#</small></div>
+      <span class="badge">#badge#</span>
+    </div>
+    #corps#
+    <div class="pied"><span>#pied_gauche#</span><span>#pied_droite#</span></div>
+  </div>
+</div>

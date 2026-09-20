@@ -1,0 +1,97 @@
+<div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class# #category#"
+     data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#"
+     data-version="#version#" data-translate-category="#translate_category#"
+     data-category="#category#" data-tags="#tags#"
+     style="width: #width#;height: #height#;#style#">
+  <style>
+    /* Un tableau de départ miniature. Aucun libellé entre doubles
+       accolades ici : un gabarit de widget ne passe pas par la
+       traduction, le texte sortirait tel quel. Ils arrivent par le
+       remplacement, depuis toHtml(). */
+    .car-w{--fond:#23282e;--relief:#2b323a;--trait:#39424c;--encre:#eef2f6;
+      --douce:#8b96a2;--ambre:#e6a63f;--vert:#57ab7d;--rouge:#d1615d;
+      --etat:var(--ambre);
+      position:relative;padding:13px 15px 14px;border-radius:9px;
+      background:var(--fond);color:var(--encre);text-align:left;
+      border:1px solid var(--trait);font-variant-numeric:tabular-nums;
+      font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .car-w.calme{--etat:var(--vert)} .car-w.bientot{--etat:var(--ambre)}
+    .car-w.passe{--etat:var(--rouge)} .car-w.dort{--etat:#5d6874}
+    .car-w .lis{position:absolute;top:0;bottom:0;left:0;width:3px;
+      border-radius:9px 0 0 9px;background:var(--etat)}
+    .car-w .haut{display:flex;justify-content:space-between;
+      align-items:flex-start;gap:10px;margin-bottom:11px}
+    .car-w .nom{font-weight:600;font-size:13.5px;line-height:1.25}
+    .car-w .nom small{display:block;font-size:11px;font-weight:500;
+      color:var(--douce)}
+    .car-w .badge{display:inline-flex;align-items:center;gap:4px;flex:none;
+      font:600 11px/1 ui-monospace,"IBM Plex Mono",monospace;padding:4px 7px;
+      border-radius:5px;background:rgba(230,166,63,.17);color:var(--ambre)}
+    .car-w .badge.mou{background:#333a42;color:var(--douce)}
+    .car-w .compte{display:flex;align-items:baseline;gap:7px}
+    .car-w .gros{font:700 40px/.85 "Barlow Condensed",Barlow,sans-serif;
+      color:var(--etat);letter-spacing:-.01em}
+    .car-w .unite{font-size:13px;font-weight:600;color:var(--douce);
+      text-transform:uppercase;letter-spacing:.08em}
+    .car-w .sous{margin:6px 0 13px;font-size:12.5px;color:var(--douce)}
+    .car-w .sous b{color:var(--encre);font-weight:600}
+    .car-w .rail{position:relative;padding-left:21px}
+    .car-w .rail:before{content:"";position:absolute;left:5px;top:8px;
+      bottom:8px;width:2px;background:var(--trait)}
+    .car-w .et{position:relative;display:flex;justify-content:space-between;
+      align-items:baseline;gap:10px;padding:4px 0}
+    .car-w .et:before{content:"";position:absolute;left:-20px;top:8px;
+      width:9px;height:9px;border-radius:50%;background:var(--fond);
+      border:2px solid var(--trait)}
+    .car-w .et.vif:before{border-color:var(--ambre);background:var(--ambre)}
+    .car-w .ou{font-size:12.5px}
+    .car-w .ou i{display:block;font-size:10.5px;font-style:normal;
+      color:var(--douce)}
+    .car-w .h{font:600 13px/1 ui-monospace,"IBM Plex Mono",monospace;flex:none}
+    .car-w .et.pale .ou,.car-w .et.pale .h{color:var(--douce)}
+    .car-w .pied{margin-top:11px;padding-top:9px;border-top:1px solid var(--trait);
+      display:flex;justify-content:space-between;align-items:center;gap:8px;
+      font-size:11.5px;color:var(--douce)}
+    .car-w .alerte{margin-top:9px;padding:4px 8px;border-radius:4px;
+      font-size:11.5px;background:rgba(209,97,93,.18);color:#f0c4c2}
+    .car-w .alerte[hidden]{display:none}
+  </style>
+  <style>
+    /* Version mobile : même contenu, dimensionné pour le pouce. */
+    .car-w, .pb-w, .ca-w, .li-w { padding: 15px 16px 16px; border-radius: 11px; }
+    .car-w .gros, .pb-w .gros { font-size: 48px; }
+    .car-w .unite { font-size: 15px; }
+    .car-w .sous, .pb-w .arrive { font-size: 14px; }
+    .car-w .ou, .pb-w .et, .li-w .dep .ou { font-size: 14px; }
+    .car-w .h, .pb-w .et .h { font-size: 15px; }
+    .car-w .et, .pb-w .et { padding: 6px 0; }
+    .li-w .dep { padding: 9px 0; }
+    .li-w .dep .h { font-size: 22px; }
+    .ca-w .toile { padding: 8px; }
+    .car-w .pied, .pb-w .pied, .ca-w .pied, .li-w .pied { font-size: 12.5px; }
+  </style>
+
+
+  <div class="car-w car-#urgence#">
+    <span class="lis"></span>
+    <div class="haut">
+      <div class="nom">#name_display#<small>#sens# · #jour#</small></div>
+      <span class="badge #badge_mou#">#car# #etoile#</span>
+    </div>
+
+    <div class="compte"><span class="gros">#reste#</span><span class="unite">#reste_unite#</span></div>
+    <div class="sous">#legende#</div>
+
+    <div class="rail">
+      <div class="et"><span class="ou">#l_origine#<i>#origine_detail#</i></span>
+        <span class="h">#depart#</span></div>
+      <div class="et vif"><span class="ou">#arret#<i>#l_montee#</i></span>
+        <span class="h">#car_heure#</span></div>
+      <div class="et pale"><span class="ou">#destination#<i>#destination_detail#</i></span>
+        <span class="h">#arrivee#</span></div>
+    </div>
+
+    <div class="alerte" #classe_perturbations#>#perturbations# #l_perturbations#</div>
+    <div class="pied"><span>#l_ligne# #ligne#</span><span>#source#</span></div>
+  </div>
+</div>

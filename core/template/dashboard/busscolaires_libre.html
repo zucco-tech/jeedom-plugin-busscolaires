@@ -1,0 +1,74 @@
+<div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class# #category#"
+     data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#"
+     data-version="#version#" data-translate-category="#translate_category#"
+     data-category="#category#" data-tags="#tags#"
+     style="width: #width#;height: #height#;#style#">
+  <style>
+    /* Rentrer d'où elle est. Le point qui bat rappelle que la position
+       est vivante ; il s'arrête net si l'on préfère moins d'animation. */
+    .li-w{--fond:#23282e;--trait:#39424c;--encre:#eef2f6;--douce:#8b96a2;
+      --ambre:#e6a63f;--vert:#57ab7d;--bleu:#6ea8d8;
+      position:relative;padding:13px 15px 14px;border-radius:9px;
+      background:var(--fond);color:var(--encre);text-align:left;
+      border:1px solid var(--trait);font-variant-numeric:tabular-nums;
+      font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .li-w .lis{position:absolute;top:0;bottom:0;left:0;width:3px;
+      border-radius:9px 0 0 9px;background:var(--bleu)}
+    .li-w.perdu .lis{background:#5d6874}
+    .li-w .haut{display:flex;justify-content:space-between;
+      align-items:flex-start;gap:10px;margin-bottom:11px}
+    .li-w .nom{font-weight:600;font-size:13.5px;line-height:1.25}
+    .li-w .nom small{display:block;font-size:11px;font-weight:500;color:var(--douce)}
+    .li-w .badge{flex:none;font:600 11px/1 ui-monospace,"IBM Plex Mono",monospace;
+      padding:4px 7px;border-radius:5px;background:rgba(110,168,216,.16);
+      color:var(--bleu)}
+    .li-w .badge.mou{background:#333a42;color:var(--douce)}
+
+    .li-w .ici{display:flex;align-items:center;gap:9px;margin-bottom:12px;
+      font-size:12.5px}
+    .li-w .point{position:relative;width:9px;height:9px;border-radius:50%;
+      background:var(--bleu);flex:none}
+    .li-w .point:after{content:"";position:absolute;inset:-4px;border-radius:50%;
+      border:2px solid var(--bleu);opacity:.55;
+      animation:li-onde 2.4s ease-out infinite}
+    .li-w.perdu .point{background:#5d6874}
+    .li-w.perdu .point:after{display:none}
+    @keyframes li-onde{
+      0%{transform:scale(.7);opacity:.6}
+      70%{transform:scale(2);opacity:0}
+      100%{transform:scale(2);opacity:0}}
+    @media (prefers-reduced-motion:reduce){
+      .li-w .point:after{animation:none;opacity:.35}}
+    .li-w .ici b{font-weight:600}
+    .li-w .ici span{color:var(--douce)}
+
+    .li-w .dep{display:flex;align-items:center;gap:9px;padding:6px 0;
+      border-top:1px solid var(--trait)}
+    .li-w .dep:first-of-type{border-top:0;padding-top:0}
+    .li-w .dep .h{font:700 19px/1 "Barlow Condensed",Barlow,sans-serif;
+      min-width:44px;color:var(--vert)}
+    .li-w .dep .l{font:600 10.5px/1 ui-monospace,"IBM Plex Mono",monospace;
+      padding:2px 5px;border-radius:4px;background:rgba(110,168,216,.16);
+      color:var(--bleu);flex:none}
+    .li-w .dep .l.sco{background:rgba(230,166,63,.17);color:var(--ambre)}
+    .li-w .dep .ou{font-size:11.5px;color:var(--douce);flex:1;overflow:hidden;
+      text-overflow:ellipsis;white-space:nowrap}
+    .li-w .dep .d{font:600 11px/1 ui-monospace,"IBM Plex Mono",monospace;
+      color:var(--douce);flex:none}
+    .li-w .rien{font-size:12.5px;color:var(--douce);line-height:1.5}
+    .li-w .pied{margin-top:11px;padding-top:9px;border-top:1px solid var(--trait);
+      display:flex;justify-content:space-between;gap:8px;font-size:11.5px;
+      color:var(--douce)}
+  </style>
+
+  <div class="li-w li-#etat#">
+    <span class="lis"></span>
+    <div class="haut">
+      <div class="nom">#name_display#<small>#sous_titre#</small></div>
+      <span class="badge #badge_mou#">#badge#</span>
+    </div>
+    <div class="ici"><span class="point"></span>#ou#</div>
+    #corps#
+    <div class="pied"><span>#pied_gauche#</span><span>#pied_droite#</span></div>
+  </div>
+</div>

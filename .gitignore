@@ -1,0 +1,10 @@
+# Construit par l'installation des dépendances
+resources/python_venv/
+
+# Index GTFS, projection du profil, clés de notification : tout est
+# reconstruit ou restauré au démarrage du démon.
+data/
+
+*~
+.DS_Store
+Thumbs.db

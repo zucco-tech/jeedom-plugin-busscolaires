@@ -1,0 +1,41 @@
+<div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class# #category#"
+     data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#"
+     data-version="#version#" data-translate-category="#translate_category#"
+     data-category="#category#" data-tags="#tags#"
+     style="width: #width#;height: #height#;#style#">
+  <style>
+    /* Le tracé réel de la ligne, dessiné à partir des coordonnées de ses
+       arrêts. Pas de fond cartographique : rien à télécharger, et cela
+       fonctionne sur un Jeedom sans accès à Internet. */
+    .ca-w{--fond:#23282e;--trait:#39424c;--encre:#eef2f6;--douce:#8b96a2;
+      --ambre:#e6a63f;--bleu:#6ea8d8;
+      position:relative;padding:13px 15px 13px;border-radius:9px;
+      background:var(--fond);color:var(--encre);text-align:left;
+      border:1px solid var(--trait);
+      font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif}
+    .ca-w .lis{position:absolute;top:0;bottom:0;left:0;width:3px;
+      border-radius:9px 0 0 9px;background:var(--ambre)}
+    .ca-w .haut{display:flex;justify-content:space-between;
+      align-items:flex-start;gap:10px;margin-bottom:10px}
+    .ca-w .nom{font-weight:600;font-size:13.5px;line-height:1.25}
+    .ca-w .nom small{display:block;font-size:11px;font-weight:500;color:var(--douce)}
+    .ca-w .badge{flex:none;font:600 11px/1 ui-monospace,"IBM Plex Mono",monospace;
+      padding:4px 7px;border-radius:5px;background:rgba(230,166,63,.17);
+      color:var(--ambre)}
+    .ca-w .toile{background:#1c2127;border:1px solid var(--trait);
+      border-radius:7px;padding:5px;margin-bottom:9px}
+    .ca-w .toile svg{display:block;width:100%;height:auto}
+    .ca-w .pied{display:flex;justify-content:space-between;gap:8px;
+      font-size:11.5px;color:var(--douce)}
+  </style>
+
+  <div class="ca-w">
+    <span class="lis"></span>
+    <div class="haut">
+      <div class="nom">#name_display#<small>#sous_titre#</small></div>
+      <span class="badge">#badge#</span>
+    </div>
+    <div class="toile">#svg#</div>
+    <div class="pied"><span>#pied_gauche#</span><span>#pied_droite#</span></div>
+  </div>
+</div>
