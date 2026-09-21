@@ -423,11 +423,11 @@ def journee(requete: Request = None, date: str | None = None,
 
     # Le profil désigne les arrêts par leur nom : on les résout en
     # identifiants, comme le fait l'application.
-    id_fuveau = _id_arret(prof.get("arret_maison"))
-    id_aix = _id_arret(prof.get("arret_ecole"))
+    id_maison = _id_arret(prof.get("arret_maison"))
+    id_ecole = _id_arret(prof.get("arret_ecole"))
     ligne = prof.get("ligne") or "1800"
-    aller = _sens(id_fuveau, None, jour, dt.time(5, 0), 360, 8, ligne, "A")
-    retour = _sens(id_aix, None, jour, dt.time(11, 0), 600, 10, ligne, "R")
+    aller = _sens(id_maison, None, jour, dt.time(5, 0), 360, 8, ligne, "A")
+    retour = _sens(id_ecole, None, jour, dt.time(11, 0), 600, 10, ligne, "R")
 
     # Les fenetres de recherche partent de 05h00 et 11h00 : on recale les
     # comptes a rebours sur l'heure reelle avant de les envoyer a l'interface.
@@ -439,17 +439,17 @@ def journee(requete: Request = None, date: str | None = None,
     demain_aller = demain_retour = None
     if jour == dt.date.today():
         if not any(d["dans_minutes"] >= 0 for d in aller):
-            demain_aller = _jour_suivant(id_fuveau, None, jour,
+            demain_aller = _jour_suivant(id_maison, None, jour,
                                          dt.time(5, 0), 360, 8, ligne, "A")
         if not any(d["dans_minutes"] >= 0 for d in retour):
-            demain_retour = _jour_suivant(id_aix, None, jour,
+            demain_retour = _jour_suivant(id_ecole, None, jour,
                                           dt.time(11, 0), 600, 10, ligne, "R")
 
     conseil_aller = _bus_pour_arriver(aller, None, prof)
     conseil_retour = _bus_apres(retour, sortie_prevue(jour, prof))
 
     lignes = {d["ligne"] for d in aller + retour}
-    arrets = {a for a in (id_fuveau, id_aix) if a}
+    arrets = {a for a in (id_maison, id_ecole) if a}
     return {
         "date": jour.isoformat(),
         "maintenant": maintenant.isoformat(timespec="seconds"),

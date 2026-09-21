@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.40
+
+- Dernières traces des communes d'origine effacées : deux variables
+  internes et un bloc de migration devenu inutile les nommaient encore.
+
 ## 2.39
 
 - Le formulaire d'équipement proposait en exemple les coordonnées d'une

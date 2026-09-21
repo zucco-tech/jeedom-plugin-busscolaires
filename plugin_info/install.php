@@ -33,25 +33,6 @@ function busscolaires_update()
     /* Le trajet vivait dans la configuration du plugin ; il appartient
        désormais à l'équipement, puisqu'il y a un équipement par enfant.
        On déménage une fois, sans rien écraser. */
-    /* Les deux arrêts portaient le nom des communes d'origine du plugin.
-       Ils s'appellent maintenant par leur rôle. On recopie une fois, sans
-       rien écraser : une installation existante ne doit rien remarquer. */
-    foreach (array('arret_fuveau' => 'arret_maison',
-                   'arret_aix' => 'arret_ecole') as $avant => $apres) {
-        foreach (eqLogic::byType('busscolaires') as $eqLogic) {
-            $ancien = $eqLogic->getConfiguration($avant, '');
-            if ($ancien !== '' && $eqLogic->getConfiguration($apres, '') === '') {
-                $eqLogic->setConfiguration($apres, $ancien)->save();
-                log::add('busscolaires', 'info', __('Arrêt repris :', __FILE__)
-                    . ' ' . $avant . ' → ' . $apres . ' (' . $eqLogic->getName() . ')');
-            }
-        }
-        $global = config::byKey($avant, 'busscolaires', '');
-        if ($global !== '' && config::byKey($apres, 'busscolaires', '') === '') {
-            config::save($apres, $global, 'busscolaires');
-        }
-    }
-
     $aDemenager = false;
     foreach (busscolaires::REGLAGES as $cle => $rien) {
         if (config::byKey($cle, 'busscolaires', '') !== '') {
