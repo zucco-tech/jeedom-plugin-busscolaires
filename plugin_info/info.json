@@ -5,16 +5,17 @@
     "licence": "GPL-3.0",
     "author": "zucco-tech",
     "require": "4.4.0",
-    "version": "2.40",
+    "version": "2.41",
     "category": "organization",
     "hasDependency": true,
     "hasOwnDeamon": true,
     "maxDependancyInstallTime": 10,
     "eventjs": false,
-    "documentation": "https://github.com/zucco-tech/jeedom-plugin-busscolaires",
-    "changelog": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/releases",
+    "documentation": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/blob/beta/docs/fr_FR/index.md",
+    "changelog": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/blob/beta/docs/fr_FR/changelog.md",
     "issue": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/issues",
     "language": [
         "fr_FR"
-    ]
+    ],
+    "changelog_beta": "https://github.com/zucco-tech/jeedom-plugin-busscolaires/blob/beta/docs/fr_FR/changelog_beta.md"
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.41
+
+- Documentation complète pour la publication : réseau couvert, origine et
+  licence des données, configuration, commandes, vacances, dépannage et
+  limites connues.
+
 ## 2.40
 
 - Dernières traces des communes d'origine effacées : deux variables
