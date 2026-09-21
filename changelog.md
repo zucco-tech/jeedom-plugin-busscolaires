@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.39
+
+- Le formulaire d'équipement proposait en exemple les coordonnées d'une
+  école bien réelle, restées du développement. Il demande maintenant
+  « latitude » et « longitude », sans désigner l'école de personne.
+
 ## 2.38 — première version publique
 
 Le plugin a vécu deux ans dans une seule maison avant d'être publié. Ce

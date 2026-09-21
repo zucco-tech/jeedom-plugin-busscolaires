@@ -301,11 +301,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 </label>
                 <div class="col-sm-4">
                   <input class="eqLogicAttr form-control" data-l1key="configuration"
-                         data-l2key="adresse_lat" placeholder="43.531597"/>
+                         data-l2key="adresse_lat" placeholder="{{latitude}}"/>
                 </div>
                 <div class="col-sm-4">
                   <input class="eqLogicAttr form-control" data-l1key="configuration"
-                         data-l2key="adresse_lon" placeholder="5.446367"/>
+                         data-l2key="adresse_lon" placeholder="{{longitude}}"/>
                 </div>
               </div>
             </fieldset>
