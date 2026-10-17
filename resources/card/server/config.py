@@ -39,6 +39,12 @@ ALERTS_URL = os.environ.get(
     "ALERTS_URL", "https://api-mobilite.rbgl.fr/api/v1/mamp/getServiceAlerts"
 )
 ALERTS_TTL = int(os.environ.get("ALERTS_TTL", "60"))  # secondes
+# Combien de temps on accepte d'attendre ce flux. Court, volontairement :
+# personne ne doit patienter pour savoir si un bus a du retard alors qu'il
+# attend l'heure de son car. Et apres un echec, on laisse le flux
+# tranquille quelques minutes au lieu de le relancer sans cesse.
+ALERTS_TIMEOUT = float(os.environ.get("ALERTS_TIMEOUT", "4"))
+ALERTS_BACKOFF = int(os.environ.get("ALERTS_BACKOFF", "300"))
 
 # --- Temps reel : SIRI StopMonitoring (passages a l'arret) ---
 # Les centres operateurs ne publient pas encore leurs seuils : l'adaptateur
@@ -53,6 +59,8 @@ SIRI_ENDPOINTS = [
 ]
 SIRI_REQUESTOR_REF = os.environ.get("SIRI_REQUESTOR_REF", "bus-ecole")
 SIRI_ENABLED = os.environ.get("SIRI_ENABLED", "1") not in ("0", "false", "no")
+SIRI_TIMEOUT = float(os.environ.get("SIRI_TIMEOUT", "6"))
+SIRI_BACKOFF = int(os.environ.get("SIRI_BACKOFF", "300"))
 
 
 # --- Trajet suivi par defaut (modifiable dans l'interface) ---

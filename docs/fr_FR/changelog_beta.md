@@ -3,6 +3,17 @@
 Ce qui est en essai sur la branche `beta` et n'est pas encore passé en
 `stable`.
 
+## 2.42
+
+- « Démon injoignable » quand le flux d'alertes de la Métropole ne répond
+  plus. Le plugin attendait ce flux jusqu'à vingt secondes, à l'intérieur
+  de la requête qui lit l'heure du car — et Jeedom abandonne justement au
+  bout de vingt secondes. Une panne chez eux devenait donc une panne chez
+  nous. L'attente tombe à quatre secondes, les dernières alertes connues
+  sont resservies telles quelles, et le flux est laissé au repos cinq
+  minutes avant d'être redemandé. Le temps réel SIRI reçoit la même
+  prudence.
+
 ## 2.41
 
 - La documentation est complète : réseau couvert et origine des données,

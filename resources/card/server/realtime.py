@@ -14,12 +14,38 @@ import re
 import time
 import xml.etree.ElementTree as ET
 
+import logging
+
 import httpx
 from google.transit import gtfs_realtime_pb2
 
 from . import config
 
+log = logging.getLogger(__name__)
+
 _cache: dict[str, tuple[float, object]] = {}
+
+# Un flux distant qui ne repond pas ne doit jamais faire attendre quelqu'un
+# qui demande l'heure de son car. Apres un echec, on le laisse tranquille
+# le temps du repli, et on ressert ce qu'on savait de mieux.
+_dernier_bon: dict[str, dict] = {}
+_muet_jusqu_a: dict[str, float] = {}
+
+
+def _boude(cle: str) -> bool:
+    return time.time() < _muet_jusqu_a.get(cle, 0.0)
+
+
+def _bouder(cle: str, secondes: int) -> None:
+    _muet_jusqu_a[cle] = time.time() + secondes
+
+
+def _de_memoire(cle: str, raison: str) -> dict:
+    """Ce qu'on savait, dit pour ce que c'est : du connu, pas du frais."""
+    vieux = _dernier_bon.get(cle)
+    if vieux is None:
+        return {"erreur": raison, "alertes": []}
+    return {**vieux, "erreur": raison, "perimee": True}
 
 
 def _cached(key: str, ttl: int, producer):
@@ -51,11 +77,20 @@ def _clean(txt: str) -> str:
     return re.sub(r"\n{3,}", "\n\n", txt).strip()
 
 
-def fetch_alerts() -> list[dict]:
-    """Toutes les alertes en cours sur le reseau metropolitain."""
+def fetch_alerts() -> dict:
+    """Toutes les alertes en cours sur le reseau metropolitain.
+
+    Jamais au prix d'une attente : le flux de la Metropole est parfois
+    lent ou muet, et il ne doit pas faire echouer la lecture du car. On
+    coupe court, on ressert les dernieres alertes connues, et on laisse le
+    flux se reposer quelques minutes avant de le redemander.
+    """
+    if _boude("alerts"):
+        return _de_memoire("alerts", "flux d'alertes injoignable")
+
     def go():
         try:
-            r = httpx.get(config.ALERTS_URL, timeout=20.0)
+            r = httpx.get(config.ALERTS_URL, timeout=config.ALERTS_TIMEOUT)
             r.raise_for_status()
         except httpx.HTTPError as e:
             return {"erreur": str(e), "alertes": []}
@@ -97,7 +132,15 @@ def fetch_alerts() -> list[dict]:
         return {"erreur": None, "alertes": out,
                 "maj": dt.datetime.now().isoformat(timespec="seconds")}
 
-    return _cached("alerts", config.ALERTS_TTL, go)
+    valeur = _cached("alerts", config.ALERTS_TTL, go)
+    if valeur.get("erreur"):
+        _bouder("alerts", config.ALERTS_BACKOFF)
+        log.warning("alertes indisponibles (%s) : on garde les dernieres "
+                    "connues et on reessaiera dans %d s",
+                    valeur["erreur"], config.ALERTS_BACKOFF)
+        return _de_memoire("alerts", valeur["erreur"])
+    _dernier_bon["alerts"] = valeur
+    return valeur
 
 
 def _iso(ts: int) -> str:
@@ -196,7 +239,7 @@ def siri_stop(stop_id: str, horizon_min: int = 90, maxi: int = 10) -> dict:
                 r = httpx.post(f"{config.SIRI_BASE}/{ep}", content=xml.encode(),
                                headers={"Content-Type": "text/xml; charset=utf-8",
                                         "SOAPAction": '"GetStopMonitoring"'},
-                               timeout=12.0)
+                               timeout=config.SIRI_TIMEOUT)
                 r.raise_for_status()
             except httpx.HTTPError as e:
                 diag[ep] = f"injoignable: {e.__class__.__name__}"
